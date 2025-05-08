@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Annotation profile for notification-management" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
+        <module name="ticket-management" />
+        <module name="board-management" />
+        <module name="project-management" />
+        <module name="Api-gateway" />
+        <module name="user-management" />
+        <module name="notification-management" />
+        <module name="comment-management" />
+        <module name="file-management" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Api-gateway" options="-parameters" />
+      <module name="board-management" options="-parameters" />
+      <module name="comment-management" options="-parameters" />
+      <module name="file-management" options="-parameters" />
+      <module name="notification-management" options="-parameters" />
+      <module name="project-management" options="-parameters" />
+      <module name="ticket-management" options="-parameters" />
+      <module name="user-management" options="-parameters" />
+    </option>
+  </component>
+</project>

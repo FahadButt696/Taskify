@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/backend/Api-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/board-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/comment-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/file-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/notification-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/project-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/ticket-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/user-management/src/main/java" charset="UTF-8" />
+  </component>
+</project>
