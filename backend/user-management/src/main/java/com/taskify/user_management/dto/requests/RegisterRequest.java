@@ -1,17 +1,15 @@
-package com.taskify.user_management.dtos;
+package com.taskify.user_management.dto.requests;
 
+import com.taskify.user_management.enums.RoleType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class RegisterRequest {
+
     @NotEmpty(message = "name must not me empty!")
     private String name;
     @Email(message = "email should be in email format!(abc@xyz.com)")
@@ -19,4 +17,7 @@ public class UserDto {
     private String email;
     @NotEmpty(message = "Password is required!")
     private String password;
+
+    private RoleType role;
+
 }

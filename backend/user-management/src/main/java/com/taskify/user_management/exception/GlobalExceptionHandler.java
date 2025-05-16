@@ -36,18 +36,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errors,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    @ExceptionHandler(ResourceNotFoundException.class)
-//    public ResponseEntity<errorDetails> handleResourceNotFoundException(
-//            ResourceNotFoundException exception, WebRequest webRequest
-//    ){
-//        errorDetails errorDetails= new errorDetails(
-//                LocalDateTime.now(),
-//                exception.getMessage(),
-//                webRequest.getDescription(false),
-//                "NOT_FOUND"
-//        );
-//        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-//    }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorDetails> handleResourceNotFoundException(
+            ResourceNotFoundException exception, WebRequest webRequest
+    ){
+        ErrorDetails errorDetails= new ErrorDetails(
+                LocalDateTime.now(),
+                exception.getMessage(),
+                webRequest.getDescription(false),
+                "NOT_FOUND"
+        );
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
 
 //    @ExceptionHandler(ticketAlreadyExistException.class)
 //    public ResponseEntity<errorDetails> handleTickerAlreadyExistException(
@@ -75,16 +75,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 //        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorDetails> handleAllException(
-            Exception exception, WebRequest webRequest
-    ){
-        ErrorDetails errorDetails= new ErrorDetails(
-                LocalDateTime.now(),
-                exception.getMessage(),
-                webRequest.getDescription(false),
-                "INTERNAL_SERVER_ERROR"
-        );
-        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorDetails> handleAllException(
+//            Exception exception, WebRequest webRequest
+//    ){
+//        ErrorDetails errorDetails= new ErrorDetails(
+//                LocalDateTime.now(),
+//                exception.getMessage(),
+//                webRequest.getDescription(false),
+//                "INTERNAL_SERVER_ERROR"
+//        );
+//        return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }

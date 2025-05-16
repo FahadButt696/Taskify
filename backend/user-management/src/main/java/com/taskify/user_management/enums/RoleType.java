@@ -4,6 +4,5 @@ public enum RoleType {
     ADMIN,
     MANAGER,
     DEVELOPER,
-    QA,
-    VIEWER
+    QA
 }
