@@ -11,5 +11,6 @@ public interface AuthService {
         TokenResponse register(RegisterRequest request);
         TokenResponse login(LoginRequest request);
 
+
     }
 

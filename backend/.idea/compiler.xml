@@ -10,7 +10,7 @@
         <module name="discovery-service" />
         <module name="config-service" />
       </profile>
-      <profile name="Annotation profile for project-management" enabled="true">
+      <profile name="Annotation profile for Api-gateway" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -19,8 +19,8 @@
         </processorPath>
         <module name="ticket-management" />
         <module name="board-management" />
-        <module name="project-management" />
         <module name="Api-gateway" />
+        <module name="project-management" />
         <module name="user-management" />
         <module name="notification-management" />
         <module name="file-management" />

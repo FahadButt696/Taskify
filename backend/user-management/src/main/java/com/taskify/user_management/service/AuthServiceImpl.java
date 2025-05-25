@@ -18,15 +18,13 @@ public class AuthServiceImpl implements AuthService{
         private final JwtUtil jwtUtil;
         private final PasswordEncoder passwordEncoder;
 
-
     @Override
     public TokenResponse register(RegisterRequest request) {
         User user = new User();
-        user.setUsername(request.getName());
+        user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPass(passwordEncoder.encode(request.getPassword()));
-        user.setRole(RoleType.MANAGER);
-
+        user.setRole(RoleType.ADMIN);
         user = userRepositry.save(user);
 
         System.out.println(user);

@@ -29,9 +29,9 @@ public class User implements UserDetails {
 
     @NotEmpty(message = "Username should not be empty!!")
     @Column(name = "User_Name", unique = true)
-    private String username;
+    private String name;
 
-    @NotEmpty(message = "Username should not be empty!!")
+    @NotEmpty(message = "email should not be empty!!")
     @Column(name = "Email", unique = true)
     private String email;
 
@@ -65,7 +65,7 @@ public class User implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
     @Override
     public boolean isAccountNonExpired() {

@@ -1,5 +1,6 @@
 package com.taskify.user_management.filters;
 
+import com.taskify.user_management.redis.service.TokenBlacklistService;
 import com.taskify.user_management.security.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -7,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +24,8 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
     private final JwtUtil jwtService;
     private final UserDetailsService userDetailsService;
+    private final TokenBlacklistService tokenBlacklistService;
+
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
@@ -35,9 +38,19 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
         token=authHeader.substring(7);
+
+        if (tokenBlacklistService.isTokenBlacklisted(token)) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.getWriter().write("Token is blacklisted");
+            return;
+        }
         userEmail=jwtService.extractUserEmail(token);
         if(userEmail!=null && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails=this.userDetailsService.loadUserByUsername(userEmail);
+            if(userDetails==null){
+                throw new RuntimeException("User not found!");
+            }
+
             if(jwtService.isTokenValid(token, userDetails)){
                 UsernamePasswordAuthenticationToken authToken=new UsernamePasswordAuthenticationToken(
                         userDetails,null,userDetails.getAuthorities());

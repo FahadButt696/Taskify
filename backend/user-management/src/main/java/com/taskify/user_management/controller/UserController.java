@@ -4,6 +4,8 @@ import com.taskify.user_management.dto.responses.GlobalResponse;
 import com.taskify.user_management.dto.responses.UserResponse;
 import com.taskify.user_management.enums.RoleType;
 import com.taskify.user_management.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +31,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<GlobalResponse<List<UserResponse>>> getAllUsers() {
         List<UserResponse> user= userService.getAllUsers();
-        GlobalResponse<List<UserResponse>> response= new GlobalResponse<>(HttpStatus.OK.value(),user);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+
+        if(user==null){
+            throw new RuntimeException("Token is Blacklisted!");
+        }
+        GlobalResponse<List<UserResponse>> response1= new GlobalResponse<>(HttpStatus.OK.value(),user);
+        return new ResponseEntity<>(response1,HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

@@ -68,11 +68,11 @@ public class JwtUtil {
             return (!isTokenExpired(token) && claims!=null);
         }
 
-        private boolean isTokenExpired(String token) {
+        public boolean isTokenExpired(String token) {
             return tokenExpirationDate(token).before(new Date());
         }
 
-        private Date tokenExpirationDate(String token) {
+        public Date tokenExpirationDate(String token) {
             return extractClaim(token, Claims::getExpiration);
         }
 
@@ -80,12 +80,12 @@ public class JwtUtil {
             return extractClaim(token,Claims::getSubject);
         }
 
-        private <T>T  extractClaim(String token, Function<Claims,T> claimsResolver) {
+        public <T>T  extractClaim(String token, Function<Claims,T> claimsResolver) {
             Claims claims=extractAllClaims(token);
             return claimsResolver.apply(claims);
         }
 
-        private Claims extractAllClaims(String token) {
+        public Claims extractAllClaims(String token) {
             return Jwts.parserBuilder()
                     .setSigningKey(getSingingKey())
                     .build()

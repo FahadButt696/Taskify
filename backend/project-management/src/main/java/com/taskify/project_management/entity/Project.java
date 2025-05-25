@@ -1,14 +1,24 @@
 package com.taskify.project_management.entity;
 
-import com.taskify.project_management.enums.ProjectType;
+import com.taskify.project_management.enums.ProjectAccess;
+import com.taskify.project_management.enums.Template;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@Table(name= "project_table")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Project {
     @Id
     @Column(name = "Project_id")
@@ -28,13 +38,17 @@ public class Project {
     private String key;
 
     @Enumerated(EnumType.STRING)
-    private ProjectType type; // KANBAN, SCRUM
+    private Template template; // KANBAN, SCRUM
 
-    private Long createdByUserId;
+    @Enumerated(EnumType.STRING)
+    private ProjectAccess access;
+
+    @Column(name = "Lead_By")
+    @NotEmpty(message = "project creator should be mention!")
+    private String createdByUserEmail;
 
     @Column(name = "created_at", updatable = false)
     private BigInteger createdAt;
-
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectMember> members = new ArrayList<>();

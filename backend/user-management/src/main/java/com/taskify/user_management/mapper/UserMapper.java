@@ -6,6 +6,6 @@ import com.taskify.user_management.entity.User;
 public class UserMapper {
 
     public static UserResponse mapToUserDto(User user) {
-        return new UserResponse(user.getUsername(),  user.getEmail(),user.getPassword());
+        return new UserResponse(user.getName(), user.getEmail(),user.getPassword());
     }
 }

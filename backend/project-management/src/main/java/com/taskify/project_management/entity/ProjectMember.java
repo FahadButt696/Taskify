@@ -20,7 +20,7 @@ public class ProjectMember {
     @SequenceGenerator(name = "Member_Seq", sequenceName = "Member_sequence", allocationSize = 1)
     private Long id;
 
-    private Long userId;
+    private String email;
 
     @Enumerated(EnumType.STRING)
     private ProjectRole role; // MANAGER, DEVELOPER, QA, VIEWER

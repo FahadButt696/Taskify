@@ -1,6 +1,6 @@
 package com.taskify.project_management.enums;
 
-public enum ProjectType {
+public enum Template {
     KANBAN,
     SCRUM
 }
