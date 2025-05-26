@@ -3,11 +3,11 @@ package com.taskify.project_management.entity;
 import com.taskify.project_management.enums.ProjectAccess;
 import com.taskify.project_management.enums.Template;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -45,10 +45,14 @@ public class Project {
 
     @Column(name = "Lead_By")
     @NotEmpty(message = "project creator should be mention!")
+    @Email
     private String createdByUserEmail;
 
     @Column(name = "created_at", updatable = false)
     private BigInteger createdAt;
+
+    @Column(name = "updated_at")
+    private BigInteger updatedAt;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectMember> members = new ArrayList<>();
@@ -58,5 +62,9 @@ public class Project {
         createdAt = BigInteger.valueOf(Instant.now().getEpochSecond());
     }
 
+     @PreUpdate
+    protected void onUpdate() {
+        updatedAt = BigInteger.valueOf(Instant.now().getEpochSecond());
+    }
 
 }

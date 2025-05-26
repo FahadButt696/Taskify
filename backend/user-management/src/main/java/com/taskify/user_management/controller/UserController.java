@@ -53,7 +53,6 @@ public class UserController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
-
     @GetMapping("Role/{id}")
     public ResponseEntity<GlobalResponse<RoleType>> getRoleByUserId(@PathVariable Long id) {
         RoleType roleType= userService.getRoleByUserId(id);

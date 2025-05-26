@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigInteger;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -28,5 +30,9 @@ public class ProjectMember {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @Column(name = "invited_at")
+    private BigInteger invitedAt;
+
 }
 
