@@ -20,6 +20,7 @@ public class FeignInterceptor implements RequestInterceptor {
                 String authHeader = request.getHeader("Authorization");
 
                 if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                    authHeader = authHeader.substring(7);
                     requestTemplate.header("Authorization", authHeader);
                 }
             }

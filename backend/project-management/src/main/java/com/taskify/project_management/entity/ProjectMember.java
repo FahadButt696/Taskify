@@ -14,6 +14,7 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "project_member")
 public class ProjectMember {
 
     @Id

@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$/backend/Api-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/board-management/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/comment-management/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/config-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/backend/discovery-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/file-management/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/notification-management/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/backend/project-management/src/main/java" charset="UTF-8" />

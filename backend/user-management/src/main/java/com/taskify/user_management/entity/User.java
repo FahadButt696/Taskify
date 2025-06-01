@@ -27,6 +27,10 @@ public class User implements UserDetails {
     @SequenceGenerator(name = "User_Seq", sequenceName = "User_sequence", allocationSize = 1)
     private Long id;
 
+    @NotEmpty(message = "organization id should not be empty!")
+    @Column(name = "Org_id", unique = true)
+    private Long organizationId;
+
     @NotEmpty(message = "Username should not be empty!!")
     @Column(name = "User_Name", unique = true)
     private String name;
@@ -49,6 +53,9 @@ public class User implements UserDetails {
 
     @Column(name = "created_at", updatable = false)
     private BigInteger createdAt;
+
+    @Column(name= "Team" )
+    List<User> friends;
 
     @PrePersist
     protected void onCreate() {

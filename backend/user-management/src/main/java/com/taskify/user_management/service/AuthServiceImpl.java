@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService{
@@ -27,9 +29,12 @@ public class AuthServiceImpl implements AuthService{
         user.setRole(RoleType.ADMIN);
         user = userRepositry.save(user);
 
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("user",user);
+
         System.out.println(user);
 
-        String token= jwtUtil.generateToken(user);
+        String token= jwtUtil.generateToken(map,user);
         return TokenResponse.builder().token(token).build();
     }
 
@@ -43,7 +48,11 @@ public class AuthServiceImpl implements AuthService{
             throw new RuntimeException("Invalid credentials!");
         }
 
-        String token= jwtUtil.generateToken(user);
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("user",user);
+
+
+        String token= jwtUtil.generateToken(map,user);
         return TokenResponse.builder().token(token).build();
     }
 

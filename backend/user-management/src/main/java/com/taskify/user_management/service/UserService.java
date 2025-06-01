@@ -4,10 +4,12 @@ import com.taskify.user_management.dto.responses.UserResponse;
 import com.taskify.user_management.enums.RoleType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Service;
 
 import java.net.http.HttpRequest;
 import java.util.List;
 
+@Service
 public interface UserService {
 
 
