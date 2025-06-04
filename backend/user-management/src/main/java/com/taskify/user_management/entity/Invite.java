@@ -13,7 +13,7 @@ public class Invite {
     private Long id;
 
     @NotEmpty(message = "organization id should not be empty!")
-    @Column(name = "Org_id", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     @NotEmpty(message = "organization id should not be empty!")
