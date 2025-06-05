@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Taskify.iml" filepath="$PROJECT_DIR$/.idea/Taskify.iml" />
-      <module fileurl="file://$PROJECT_DIR$/backend/project-management/project-management.iml" filepath="$PROJECT_DIR$/backend/project-management/project-management.iml" />
     </modules>
   </component>
 </project>

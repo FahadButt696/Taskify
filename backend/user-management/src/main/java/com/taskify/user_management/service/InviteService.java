@@ -2,7 +2,9 @@ package com.taskify.user_management.service;
 
 import com.taskify.user_management.dto.requests.InviteRequest;
 import com.taskify.user_management.entity.Invite;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface InviteService {
 
 

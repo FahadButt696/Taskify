@@ -14,11 +14,10 @@ import static com.taskify.user_management.messaging.config.RabbitMQConfig.*;
 public class InviteConsumer {
 
         private final MailService mailService;
-
-        @RabbitListener()
+        @RabbitListener(queues = "INVITE_QUEUE")
         public void handleInvite(Invite invite) {
             String subject = "You're invited to join an organization!";
-            String acceptLink = "http://localhost:8080/api/invite/accept/" + invite.getToken();
+            String acceptLink = "http://localhost:8081/api/invite/accept/" + invite.getToken();
             String body = "Click here to accept the invitation: " + acceptLink;
 
             mailService.sendMail(invite.getEmail(), subject, body);

@@ -10,6 +10,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.amqp.core.ExchangeBuilder.topicExchange;
 
@@ -21,14 +22,14 @@ public class RabbitMQConfig {
 //            @Value("${queue.dormancy_queue}")
 //            public String dormancyQueue;
 //
-            @Value("${queue.Invite.queue}")
-            public static String INVITE_QUEUE;
+//            @Value("${queue.Invite.queue}")
+            public static String INVITE_QUEUE= "inviteQueue";
 
-            @Value("${exchange.name}")
-            public String exchange;
+//            @Value("${exchange.name}")
+            public String exchange= "exchange";
 
-            @Value("${routing.Invitation_key}")
-            public String InviteKey;
+//            @Value("${routing.Invitation_key}")
+            public String InviteKey = "inviteKey";
 //            @Value("${routing.dormancy_key}")
 //            public String dormancyKey;
 //
@@ -62,10 +63,10 @@ public class RabbitMQConfig {
 //            public Binding binding() {
 //                return BindingBuilder.bind(newNotificationQueue()).to(topicExchange()).with(notificationKey);
 //            }
-            @Bean
-            public Binding dormancyBinding() {
-                return BindingBuilder.bind(newInviteQueue()).to(topicExchange()).with(InviteKey);
-            }
+//            @Bean
+//            public Binding dormancyBinding() {
+//                return BindingBuilder.bind(newInviteQueue()).to(topicExchange()).with(InviteKey);
+//            }
 //            @Bean
 //            public Binding documentBinding() {
 //                return BindingBuilder.bind(documentQueue()).to(topicExchange()).with(documentAttachKey);

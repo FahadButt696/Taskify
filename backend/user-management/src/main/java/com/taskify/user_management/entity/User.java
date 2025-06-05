@@ -54,8 +54,8 @@ public class User implements UserDetails {
     @Column(name = "created_at", updatable = false)
     private BigInteger createdAt;
 
-    @Column(name= "Team" )
-    List<User> friends;
+//    @Column(name= "Team" )
+//    List<User> friends;
 
     @PrePersist
     protected void onCreate() {

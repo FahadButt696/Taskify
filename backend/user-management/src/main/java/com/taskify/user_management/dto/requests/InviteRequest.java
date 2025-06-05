@@ -8,6 +8,5 @@ import lombok.Data;
 public class InviteRequest {
         private String email;
         private Long organizationId;
-    }
 
 }

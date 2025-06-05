@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/invite")
-@RequiredArgsConstructor
 public class InviteController {
 
     private final InviteService inviteService;
+
+    public InviteController(InviteService inviteService) {
+        this.inviteService = inviteService;
+    }
 
     @PostMapping
     public ResponseEntity<String> invite(@RequestBody InviteRequest request) {
