@@ -1,7 +1,9 @@
 package com.taskify.user_management.controller;
 
 import com.taskify.user_management.dto.responses.GlobalResponse;
+import com.taskify.user_management.dto.responses.OrgRes;
 import com.taskify.user_management.dto.responses.UserResponse;
+import com.taskify.user_management.entity.Organization;
 import com.taskify.user_management.enums.RoleType;
 import com.taskify.user_management.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -59,5 +61,13 @@ public class UserController {
         GlobalResponse<RoleType> response= new GlobalResponse<>(HttpStatus.OK.value(),roleType);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
+
+
+
+
+
+
+
+
 
 }

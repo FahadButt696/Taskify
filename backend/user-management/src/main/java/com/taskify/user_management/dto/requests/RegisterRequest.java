@@ -15,6 +15,9 @@ public class RegisterRequest {
     @Email(message = "email should be in email format!(abc@xyz.com)")
     @NotEmpty(message = "Email is required!")
     private String email;
+
+    @NotEmpty(message = "Organization is required!")
+    private String orgName;
     @NotEmpty(message = "Password is required!")
     private String password;
 

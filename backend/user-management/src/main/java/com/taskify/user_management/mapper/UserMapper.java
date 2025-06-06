@@ -8,4 +8,5 @@ public class UserMapper {
     public static UserResponse mapToUserDto(User user) {
         return new UserResponse(user.getName(), user.getEmail(),user.getPassword());
     }
+
 }

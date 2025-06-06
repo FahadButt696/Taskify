@@ -25,11 +25,15 @@ public class RabbitMQConfig {
 //            @Value("${queue.Invite.queue}")
             public static String INVITE_QUEUE= "inviteQueue";
 
+            public static String REGISTER_QUEUE= "registerQueue";
+
+
 //            @Value("${exchange.name}")
             public String exchange= "exchange";
 
 //            @Value("${routing.Invitation_key}")
             public String InviteKey = "inviteKey";
+            public String RegisterKey= "registerKey";
 //            @Value("${routing.dormancy_key}")
 //            public String dormancyKey;
 //
@@ -54,6 +58,8 @@ public class RabbitMQConfig {
                 return new Queue(INVITE_QUEUE);
             }
 
+            @Bean
+            public Queue newRegisterQueue() {return new Queue(REGISTER_QUEUE);}
             @Bean
             public TopicExchange topicExchange() {
                 return new TopicExchange(exchange);

@@ -3,7 +3,7 @@ package com.taskify.user_management.service;
 import com.taskify.user_management.dto.requests.InviteRequest;
 import com.taskify.user_management.entity.Invite;
 import com.taskify.user_management.enums.StatusEnum;
-import com.taskify.user_management.messaging.producer.InviteProducer;
+import com.taskify.user_management.messaging.producer.Producer;
 import com.taskify.user_management.repository.InviteRepositry;
 import com.taskify.user_management.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.UUID;
 public class InviteServiceImpl implements InviteService {
 
         private final InviteRepositry inviteRepo;
-        private final InviteProducer inviteProducer;
+        private final Producer producer;
         private final JwtUtil jwtUtil; // Your JWT util
 
         public void sendInvite(InviteRequest request) {
@@ -28,7 +28,7 @@ public class InviteServiceImpl implements InviteService {
             inviteRepo.save(invite);
 
             // Send to RabbitMQ
-            inviteProducer.sendToQueue(invite);
+            producer.sendToInviteQueue(invite);
         }
 
         public void acceptInvite(String token, String authHeader) {

@@ -3,8 +3,11 @@ package com.taskify.user_management.service;
 import com.taskify.user_management.dto.requests.LoginRequest;
 import com.taskify.user_management.dto.requests.RegisterRequest;
 import com.taskify.user_management.dto.responses.TokenResponse;
+import com.taskify.user_management.entity.Organization;
 import com.taskify.user_management.enums.RoleType;
 import com.taskify.user_management.entity.User;
+import com.taskify.user_management.messaging.producer.Producer;
+import com.taskify.user_management.repository.OrganizationRepositry;
 import com.taskify.user_management.repository.UserRepositry;
 import com.taskify.user_management.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -19,22 +22,30 @@ public class AuthServiceImpl implements AuthService{
         private final UserRepositry userRepositry;
         private final JwtUtil jwtUtil;
         private final PasswordEncoder passwordEncoder;
+        private final MailService mailService;
+        private final Producer producer;
+    private final OrganizationRepositry organizationRepository;
 
     @Override
     public TokenResponse register(RegisterRequest request) {
+
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPass(passwordEncoder.encode(request.getPassword()));
         user.setRole(RoleType.ADMIN);
         user = userRepositry.save(user);
-
+        Organization organization = new Organization();
+        organization.setName(request.getOrgName());
+        organizationRepository.save(organization);
+        user.setOrganization(organization);
         HashMap<String,Object> map = new HashMap<>();
         map.put("user",user);
 
         System.out.println(user);
 
         String token= jwtUtil.generateToken(map,user);
+        producer.sendToRegisterQueue(user);
         return TokenResponse.builder().token(token).build();
     }
 

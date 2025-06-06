@@ -1,10 +1,14 @@
 package com.taskify.user_management.service;
 
+import com.taskify.user_management.dto.responses.OrgRes;
 import com.taskify.user_management.dto.responses.UserResponse;
+import com.taskify.user_management.entity.Organization;
 import com.taskify.user_management.enums.RoleType;
 import com.taskify.user_management.exception.ResourceNotFoundException;
+import com.taskify.user_management.mapper.OrgMapper;
 import com.taskify.user_management.mapper.UserMapper;
 import com.taskify.user_management.entity.User;
+import com.taskify.user_management.messaging.producer.Producer;
 import com.taskify.user_management.repository.UserRepositry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +22,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService{
 
     private final UserRepositry userRepositry;
+
+
 
     @Override
     public UserResponse getUserById(Long id) {
