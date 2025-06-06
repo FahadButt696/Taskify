@@ -9,5 +9,5 @@ public interface InviteService {
 
 
     public void sendInvite(InviteRequest invite);
-    public void acceptInvite(String token,String authHeader);
+    public void acceptInvite(String token,String authHeader) throws Exception;
 }

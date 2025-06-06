@@ -24,7 +24,7 @@ public class InviteController {
 
     @GetMapping("/accept/{token}")
     public ResponseEntity<String> acceptInvite(@PathVariable String token,
-                                               @RequestHeader("Authorization") String tokenHeader) {
+                                               @RequestHeader("Authorization") String tokenHeader) throws Exception {
         inviteService.acceptInvite(token, tokenHeader);
         return ResponseEntity.ok("Invite accepted.");
     }

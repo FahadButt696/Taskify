@@ -2,13 +2,19 @@ package com.taskify.user_management.service;
 
 import com.taskify.user_management.dto.requests.InviteRequest;
 import com.taskify.user_management.entity.Invite;
+import com.taskify.user_management.entity.Organization;
+import com.taskify.user_management.entity.User;
 import com.taskify.user_management.enums.StatusEnum;
 import com.taskify.user_management.messaging.producer.Producer;
 import com.taskify.user_management.repository.InviteRepositry;
+import com.taskify.user_management.repository.OrganizationRepositry;
+import com.taskify.user_management.repository.UserRepositry;
 import com.taskify.user_management.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,8 +22,10 @@ import java.util.UUID;
 public class InviteServiceImpl implements InviteService {
 
         private final InviteRepositry inviteRepo;
+        private final UserRepositry userRepo;
         private final Producer producer;
-        private final JwtUtil jwtUtil; // Your JWT util
+        private final JwtUtil jwtUtil;// Your JWT util
+        private final OrganizationRepositry organizationRepo;
 
         public void sendInvite(InviteRequest request) {
             Invite invite = new Invite();
@@ -31,18 +39,31 @@ public class InviteServiceImpl implements InviteService {
             producer.sendToInviteQueue(invite);
         }
 
-        public void acceptInvite(String token, String authHeader) {
-//            Invite invite = inviteRepo.findByToken(token)
-//                    .orElseThrow(() -> new RuntimeException("Invalid token"));
-//
-//            invite.setStatus(StatusEnum.valueOf("ACCEPTED"));
-//            inviteRepo.save(invite);
-//
-//            Long userId = jwtUtil.getUserIdFromToken(authHeader);
+        public void acceptInvite(String token, String authHeader) throws Exception {
 
-            // Add to organization table
-            // Example: OrganizationUser entity
-            // Save userId + invite.getOrganizationId() into org-user table
+            Invite invite = inviteRepo.findByToken(token);
+
+            if(invite==null){
+                throw new Exception("Invite Not Found");
+            }
+            User user= userRepo.findByEmail(invite.getEmail());
+
+            if(user==null){
+                throw new Exception("User Not Found in Taskify!");
+            }
+
+            invite.setStatus(StatusEnum.valueOf("ACCEPTED"));
+            inviteRepo.save(invite);
+
+            Organization organization = organizationRepo.findById(invite.getOrganizationId());
+            if(organization==null){
+                throw new Exception("Organization Not Found");
+            }
+            List<User> users= new ArrayList<User>();
+            users.add(user);
+            organization.setUsers(users);
+            organizationRepo.save(organization);
+
         }
 
 }

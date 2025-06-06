@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class Consumer {
         private final MailService mailService;
 
-        @RabbitListener(queues = "INVITE_QUEUE")
+        @RabbitListener(queues = "inviteQueue")
         public void handleInvite(Invite invite) {
             String subject = "You're invited to join an organization!";
             String acceptLink = "http://localhost:8081/api/invite/accept/" + invite.getToken();
@@ -22,7 +22,7 @@ public class Consumer {
         }
 
 
-        @RabbitListener(queues = "REGISTER_QUEUE")
+        @RabbitListener(queues = "registerQueue")
         public void handleRegistration(User user) {
             String subject = "Congratulations for successfull registrtion!";
             //put Login page route here
