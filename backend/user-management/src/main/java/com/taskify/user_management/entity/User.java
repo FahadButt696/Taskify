@@ -1,5 +1,6 @@
 package com.taskify.user_management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.taskify.user_management.enums.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -21,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "User_Seq")

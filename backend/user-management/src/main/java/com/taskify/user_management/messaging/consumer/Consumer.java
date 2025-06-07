@@ -1,5 +1,7 @@
 package com.taskify.user_management.messaging.consumer;
 
+import com.taskify.user_management.dto.responses.InviteResponse;
+import com.taskify.user_management.dto.responses.UserResponse;
 import com.taskify.user_management.entity.Invite;
 import com.taskify.user_management.entity.User;
 import com.taskify.user_management.service.MailService;
@@ -13,7 +15,7 @@ public class Consumer {
         private final MailService mailService;
 
         @RabbitListener(queues = "inviteQueue")
-        public void handleInvite(Invite invite) {
+        public void handleInvite(InviteResponse invite) {
             String subject = "You're invited to join an organization!";
             String acceptLink = "http://localhost:8081/api/invite/accept/" + invite.getToken();
             String body = "Click here to accept the invitation: " + acceptLink;
@@ -23,7 +25,7 @@ public class Consumer {
 
 
         @RabbitListener(queues = "registerQueue")
-        public void handleRegistration(User user) {
+        public void handleRegistration(UserResponse user) {
             String subject = "Congratulations for successfull registrtion!";
             //put Login page route here
             String acceptLink = "http://localhost:8081/api/invite/accept/";

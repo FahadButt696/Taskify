@@ -6,6 +6,7 @@ import com.taskify.user_management.dto.responses.TokenResponse;
 import com.taskify.user_management.entity.Organization;
 import com.taskify.user_management.enums.RoleType;
 import com.taskify.user_management.entity.User;
+import com.taskify.user_management.mapper.UserMapper;
 import com.taskify.user_management.messaging.producer.Producer;
 import com.taskify.user_management.repository.OrganizationRepositry;
 import com.taskify.user_management.repository.UserRepositry;
@@ -45,7 +46,7 @@ public class AuthServiceImpl implements AuthService{
         System.out.println(user);
 
         String token= jwtUtil.generateToken(map,user);
-        producer.sendToRegisterQueue(user);
+        producer.sendToRegisterQueue(UserMapper.mapToUserDto(user));
         return TokenResponse.builder().token(token).build();
     }
 

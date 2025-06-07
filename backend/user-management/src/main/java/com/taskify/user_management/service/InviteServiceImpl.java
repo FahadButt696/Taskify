@@ -5,6 +5,7 @@ import com.taskify.user_management.entity.Invite;
 import com.taskify.user_management.entity.Organization;
 import com.taskify.user_management.entity.User;
 import com.taskify.user_management.enums.StatusEnum;
+import com.taskify.user_management.mapper.InviteMapper;
 import com.taskify.user_management.messaging.producer.Producer;
 import com.taskify.user_management.repository.InviteRepositry;
 import com.taskify.user_management.repository.OrganizationRepositry;
@@ -31,12 +32,12 @@ public class InviteServiceImpl implements InviteService {
             Invite invite = new Invite();
             invite.setEmail(request.getEmail());
             invite.setOrganizationId(request.getOrganizationId());
-            invite.setStatus(StatusEnum.valueOf("PENDING"));
+            invite.setStatus(StatusEnum.PENDING);
             invite.setToken(UUID.randomUUID().toString());
             inviteRepo.save(invite);
 
             // Send to RabbitMQ
-            producer.sendToInviteQueue(invite);
+            producer.sendToInviteQueue(InviteMapper.mapToInviteDto(invite));
         }
 
         public void acceptInvite(String token, String authHeader) throws Exception {
@@ -52,7 +53,7 @@ public class InviteServiceImpl implements InviteService {
                 throw new Exception("User Not Found in Taskify!");
             }
 
-            invite.setStatus(StatusEnum.valueOf("ACCEPTED"));
+            invite.setStatus(StatusEnum.APPROVED);
             inviteRepo.save(invite);
 
             Organization organization = organizationRepo.findById(invite.getOrganizationId());

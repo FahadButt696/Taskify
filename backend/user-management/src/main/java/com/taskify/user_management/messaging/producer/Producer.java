@@ -1,5 +1,7 @@
 package com.taskify.user_management.messaging.producer;
 
+import com.taskify.user_management.dto.responses.InviteResponse;
+import com.taskify.user_management.dto.responses.UserResponse;
 import com.taskify.user_management.entity.Invite;
 import com.taskify.user_management.entity.User;
 import com.taskify.user_management.messaging.config.RabbitMQConfig;
@@ -12,11 +14,12 @@ import org.springframework.stereotype.Component;
 public class Producer {
         private final RabbitTemplate rabbitTemplate;
 
-        public void sendToInviteQueue(Invite invite) {
-            rabbitTemplate.convertAndSend(RabbitMQConfig.INVITE_QUEUE, invite);
+
+        public void sendToInviteQueue(InviteResponse invite) {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.exchange,RabbitMQConfig.InviteKey, invite);
         }
 
-        public void sendToRegisterQueue(User user) {
-            rabbitTemplate.convertAndSend(RabbitMQConfig.REGISTER_QUEUE, user);
+        public void sendToRegisterQueue(UserResponse user) {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.exchange,RabbitMQConfig.RegisterKey, user);
         }
 }

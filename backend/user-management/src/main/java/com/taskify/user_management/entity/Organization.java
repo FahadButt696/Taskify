@@ -33,6 +33,7 @@ public class Organization {
     @Column(name = "created_at", updatable = false)
     private BigInteger createdAt;
 
+
     @PrePersist
     protected void onCreate() {
         createdAt = BigInteger.valueOf(Instant.now().getEpochSecond());
