@@ -34,11 +34,11 @@ public class AuthServiceImpl implements AuthService{
         user.setEmail(request.getEmail());
         user.setPass(passwordEncoder.encode(request.getPassword()));
         user.setRole(RoleType.ADMIN);
-        user = userRepositry.save(user);
         Organization organization = new Organization();
         organization.setName(request.getOrgName());
-        organizationRepository.save(organization);
+//        organizationRepository.save(organization);
         user.setOrganization(organization);
+        user = userRepositry.save(user);
         HashMap<String,Object> map = new HashMap<>();
         map.put("user",user);
 

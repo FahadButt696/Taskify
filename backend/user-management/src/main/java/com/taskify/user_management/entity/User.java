@@ -51,7 +51,7 @@ public class User implements UserDetails {
     @Column(name = "created_at", updatable = false)
     private BigInteger createdAt;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 //    @Column(name= "Team" )

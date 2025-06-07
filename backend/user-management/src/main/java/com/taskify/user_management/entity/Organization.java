@@ -1,11 +1,11 @@
 package com.taskify.user_management.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.List;
@@ -26,7 +26,8 @@ public class Organization {
     @Column(name = "Org_Name", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "organization")
+    @JsonBackReference
     private List<User> users;
 
     @Column(name = "created_at", updatable = false)
